@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mavascon <mavascon@student.42.fr>          +#+  +:+       +#+         #
+#    By: dcarneir <dcarneir@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/31 19:20:51 by dcarneir          #+#    #+#              #
-#    Updated: 2026/06/10 19:34:41 by mavascon         ###   ########.fr        #
+#    Updated: 2026/06/17 00:46:31 by dcarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRCS = push_swap.c \
 	sorter_simple.c \
 	utils_disorder.c \
 	print_bench.c \
-	sorter_medium.c
+	sorter_medium2.c
 
 OBJS = $(SRCS:.c=.o)
 

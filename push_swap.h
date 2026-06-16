@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mavascon <mavascon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dcarneir <dcarneir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 19:33:50 by mavascon          #+#    #+#             */
-/*   Updated: 2026/06/10 22:08:26 by mavascon         ###   ########.fr       */
+/*   Updated: 2026/06/17 00:46:50 by dcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ int				find_min_index(t_stack *a);
 void			select_algo(t_stack a, t_stack b, int *algo, int *bench);
 void			sort_simple(t_stack *b, t_stack *a,
 					t_bench_stats *stats, int *bench);
-void sort_medium(t_stack *b, t_stack *a, t_bench_stats *stats, int *bench);
+void			sort_medium(t_stack *b, t_stack *a, t_bench_stats *stats, int *bench);
 
-	void print_bench(int *algo, t_bench_stats *stats);
+void			print_bench(int *algo, t_bench_stats *stats);
 
 double			disorder(t_stack *a, int print);
 void			print_disorder(double disorder);

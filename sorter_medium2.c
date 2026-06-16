@@ -3,65 +3,74 @@
 /*                                                        :::      ::::::::   */
 /*   sorter_medium2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mavascon <mavascon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dcarneir <dcarneir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 21:49:56 by mavascon          #+#    #+#             */
-/*   Updated: 2026/06/10 22:35:07 by mavascon         ###   ########.fr       */
+/*   Updated: 2026/06/17 00:42:50 by dcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int 	find_chunk_size(t_stack *a)
+static int	find_chunk_size(t_stack *a)
 {
 	int	n;
+	int	total;
 
 	n = 1;
-	while (1)
-	{
-		if ((n * n) < a->size)
-			n++;
-		if ((n * n) >= a->size)
-			return (n);
-	}
+	total = a->top + 1;
+	while (n * n < total)
+		n++;
 	return (n);
 }
 
-static int		*find_chunk_index(t_stack *a)
+static void	sort_ranks(int *ranks, int size)
 {
-	int		*ranks;
-	int 	i;
-	int		min;
-	int		j;
-	int 	chunk;
+	int	i;
+	int	j;
+	int	temp;
 
-	j = 0;
-	min = 0;
-	chunk = find_chunk_size(a);
-	ranks = calloc(chunk, 4);
-	if (!ranks)
-		return(0);
-	j = -1;
-	while(++j < chunk)
+	i = 1;
+	while (i < size)
 	{
-		min = 0;
-		i = -1;
-		while(i++ <= a->top)
-			if (a->data[i] < a->data[min])			
-				min = i;
-		ranks[j] = a->data[min];
+		temp = ranks[i];
+		j = i - 1;
+		while (j >= 0 && ranks[j] > temp)
+		{
+			ranks[j + 1] = ranks[j];
+			j--;
+		}
+		ranks[j + 1] = temp;
+		i++;
 	}
+}
+
+static int	*find_chunk_index(t_stack *a)
+{
+	int	*ranks;
+	int	i;
+
+	ranks = malloc(sizeof(int) * (a->top + 1));
+	if (!ranks)
+		return (0);
+	i = 0;
+	while (i <= a->top)
+	{
+		ranks[i] = a->data[i];
+		i++;
+	}
+	sort_ranks(ranks, a->top + 1);
 	return (ranks);
 }
 
-static void bring_to_top(t_stack *b, int max, t_bench_stats *stats, int *bench)
+static void	bring_to_top(t_stack *b, int max, t_bench_stats *stats, int *bench)
 {
 	int		n;
 
 	n = (b->top + 1) - max;
 	if (max <= b->top / 2)
 	{
-		while (max)
+		while (max > 0)
 		{
 			rb(b, stats, bench);
 			max--;
@@ -69,7 +78,7 @@ static void bring_to_top(t_stack *b, int max, t_bench_stats *stats, int *bench)
 	}
 	else
 	{
-		while (n)
+		while (n > 0)
 		{
 			rrb(b, stats, bench);
 			n--;
@@ -77,15 +86,15 @@ static void bring_to_top(t_stack *b, int max, t_bench_stats *stats, int *bench)
 	}
 }
 
-int sorter(t_stack *b, t_stack *a, t_bench_stats *stats, int *bench)
+static void	sorter(t_stack *b, t_stack *a, t_bench_stats *stats, int *bench)
 {
-	int max;
-	int i;
+	int	max;
+	int	i;
 
-	max = 0;
 	while (b->top >= 0)
 	{
-		i = 0;
+		max = 0;
+		i = 1;
 		while (i <= b->top)
 		{
 			if (b->data[i] > b->data[max])
@@ -95,28 +104,44 @@ int sorter(t_stack *b, t_stack *a, t_bench_stats *stats, int *bench)
 		bring_to_top(b, max, stats, bench);
 		pa(a, b, stats, bench);
 	}
-	return (max);
 }
-#include <stdio.h>
 
-void sort_medium(t_stack *b, t_stack *a, t_bench_stats *stats, int *bench)
+static int	find_rank_position(int value, int *ranks, int chunk)
 {
-	int i;
-	int *ranks;
-	int chunk;	
-	
-	chunk = find_chunk_size(a);
+	int	i;
+
+	i = 0;
+	while (i < chunk)
+	{
+		if (value == ranks[i])
+			return (i);
+		i++;
+	}
+	return (chunk);
+}
+
+void	sort_medium(t_stack *b, t_stack *a, t_bench_stats *stats, int *bench)
+{
+	int	i;
+	int	*ranks;
+	int	chunk;	
+
 	while (a->top >= 0)
-	{		
-		i = 0;
+	{
+		chunk = find_chunk_size(a);
 		ranks = find_chunk_index(a);
-		while (i < chunk)
+		if (!ranks)
+			return ;
+		while (chunk > 0)
 		{
-			if (a->data[0] == ranks[i])
+			i = find_rank_position(a->data[0], ranks, chunk);
+			if (i < chunk)
+			{
 				pb(b, a, stats, bench);
+				ranks[i] = ranks[--chunk];
+			}
 			else
 				ra(a, stats, bench);
-			i++;
 		}
 		free(ranks);
 	}

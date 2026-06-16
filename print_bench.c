@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_bench.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mavascon <mavascon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dcarneir <dcarneir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 15:27:40 by dcarneir          #+#    #+#             */
-/*   Updated: 2026/06/10 18:34:50 by mavascon         ###   ########.fr       */
+/*   Updated: 2026/06/17 00:52:31 by dcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,9 @@ void	print_bench(int	*algo, t_bench_stats *stats)
 	if (*algo == 1)
 		write (1, "Simple / O(n2)\n", 15);
 	else if (*algo == 2)
-		write (1, "Medium / O(n√n)\n", 16);
+		write (1, "Medium / O(n√n)\n", 19);
 	else if (*algo == 3)
 		write (1, "Complex / O(n log n)\n", 21);
-
 	else
 	{
 		write (1, "Adaptative / ", 10);
