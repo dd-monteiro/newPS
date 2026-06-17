@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mavascon <mavascon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dcarneir <dcarneir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 15:58:30 by dcarneir          #+#    #+#             */
-/*   Updated: 2026/06/10 19:48:07 by mavascon         ###   ########.fr       */
+/*   Updated: 2026/06/17 17:58:16 by dcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void print_stacks(t_stack *a, t_stack *b);
-
-
-static int parse_error(t_stack *a, t_stack *b)
+static int	parse_error(t_stack *a, t_stack *b)
 {
 	write(2, "Error\n", 6);
 	free_stack(a);
@@ -64,42 +61,8 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!parse_numbers(&a, argc, argv, start))
 		return (parse_error(&a, &b));
-	printf("size a: %i\n top a: %i\n", a.size, a.top);
-	print_stacks(&a, &b);
 	select_algo(a, b, &algo, &bench);
-	print_stacks(&a, &b);
 	free_stack(&a);
 	free_stack(&b);
 	return (0);
-}
-
-static void print_stacks(t_stack *a, t_stack *b)
-{
-	int i;
-	int max;
-
-	max = a->top;
-	if (b->top > max)
-		max = b->top;
-
-	printf("----\n");
-	printf("a  b\n\n");
-
-	i = 0;
-	while (i <= max)
-	{
-		if (i <= a->top)
-			printf("%i", a->data[i]);
-		else
-			printf(" ");
-
-		printf("  ");
-
-		if (i <= b->top)
-			printf("%i", b->data[i]);
-
-		printf("\n");
-		i++;
-	}
-	printf("----\n");
 }

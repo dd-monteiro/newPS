@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_flags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mavascon <mavascon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dcarneir <dcarneir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 14:20:43 by dcarneir          #+#    #+#             */
-/*   Updated: 2026/06/10 19:33:33 by mavascon         ###   ########.fr       */
+/*   Updated: 2026/06/17 17:57:10 by dcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,7 @@ static int	ft_strcmp(const char *s1, const char *s2)
 	return ((unsigned char)*s1 - (unsigned char)*s2);
 }
 
-void sort_adaptative(t_stack *a, t_stack *b, t_bench_stats *stats, int *algo, int *bench)
-{
-	if (disorder(a, 0) < 20)
-	{
-		*algo = 4;
-		sort_simple(b, a, stats, bench);
-	}
-	else if (disorder(a, 0) < 50)
-	{
-		*algo = 5;
-		sort_medium(b, a, stats, bench);
-	}
-/* 	else
-	{
-		*algo = 6;
-		sort_complex(&b, &a, &stats, bench);
-	} */
-	return ;
-}
-
-static int set_strategy(char *flag, int *algo)
+static int	set_strategy(char *flag, int *algo)
 {
 	if (*algo != 0)
 		return (0);

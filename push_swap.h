@@ -6,7 +6,7 @@
 /*   By: dcarneir <dcarneir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 19:33:50 by mavascon          #+#    #+#             */
-/*   Updated: 2026/06/17 00:46:50 by dcarneir         ###   ########.fr       */
+/*   Updated: 2026/06/17 18:04:04 by dcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void			rra(t_stack *a, t_bench_stats *stats, int *bench);
 void			rrb(t_stack *b, t_bench_stats *stats, int *bench);
 void			rrr(t_stack *a, t_stack *b, t_bench_stats *stats, int *bench);
 void			sa(t_stack *a, t_bench_stats *stats, int *bench);
-void 			sb(t_stack *b, t_bench_stats *stats, int *bench);
-void 			ss(t_stack *a, t_stack *b, t_bench_stats *stats, int *bench);
+void			sb(t_stack *b, t_bench_stats *stats, int *bench);
+void			ss(t_stack *a, t_stack *b, t_bench_stats *stats, int *bench);
 
 int				check_flags(int argc, char **argv, int *algo, int *bench);
 int				init_stack(t_stack *stack, int size);
@@ -63,7 +63,10 @@ int				find_min_index(t_stack *a);
 void			select_algo(t_stack a, t_stack b, int *algo, int *bench);
 void			sort_simple(t_stack *b, t_stack *a,
 					t_bench_stats *stats, int *bench);
-void			sort_medium(t_stack *b, t_stack *a, t_bench_stats *stats, int *bench);
+void			sort_medium(t_stack *b, t_stack *a,
+					t_bench_stats *stats, int *bench);
+void			sorter(t_stack *b, t_stack *a,
+					t_bench_stats *stats, int *bench);
 
 void			print_bench(int *algo, t_bench_stats *stats);
 
