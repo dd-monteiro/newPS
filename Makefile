@@ -6,7 +6,7 @@
 #    By: dcarneir <dcarneir@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/31 19:20:51 by dcarneir          #+#    #+#              #
-#    Updated: 2026/06/17 18:03:00 by dcarneir         ###   ########.fr        #
+#    Updated: 2026/06/18 21:01:39 by dcarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,9 @@ SRCS = push_swap.c \
 	utils_disorder.c \
 	print_bench.c \
 	sorter_medium.c \
-	sorter_medium_utils.c
+	sorter_medium_utils.c \
+	parse_split.c	\
+	ft_split.c
 
 OBJS = $(SRCS:.c=.o)
 

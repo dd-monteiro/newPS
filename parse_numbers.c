@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_numbers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mavascon <mavascon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dcarneir <dcarneir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 16:31:08 by dcarneir          #+#    #+#             */
-/*   Updated: 2026/06/10 19:47:31 by mavascon         ###   ########.fr       */
+/*   Updated: 2026/06/18 21:50:37 by dcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,30 @@ static int	is_valid_number(char *str)
 	return (1);
 }
 
-int	parse_numbers(t_stack *a, int argc, char **argv, int start)
+static void	free_split(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}
+
+static int	parse_split(t_stack *a, char **split)
 {
 	long	n;
+	int		i;
 
-	while (start < argc)
+	i = 0;
+	while (split[i])
 	{
-		if (!is_valid_number(argv[start]))
+		if (!is_valid_number(split[i]))
 			return (0);
-		if (!ft_atol(argv[start], &n))
+		if (!ft_atol(split[i], &n))
 			return (0);
 		if (n < INT_MIN || n > INT_MAX)
 			return (0);
@@ -97,6 +112,26 @@ int	parse_numbers(t_stack *a, int argc, char **argv, int start)
 			return (0);
 		if (!stack_a_add_back(a, (int)n))
 			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	parse_numbers(t_stack *a, int argc, char **argv, int start)
+{
+	char	**split;
+
+	while (start < argc)
+	{
+		split = ft_split(argv[start], ' ');
+		if (!split)
+			return (0);
+		if (!parse_split(a, split))
+		{
+			free_split(split);
+			return (0);
+		}
+		free_split(split);
 		start++;
 	}
 	return (1);

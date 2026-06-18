@@ -6,7 +6,7 @@
 /*   By: dcarneir <dcarneir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 19:33:50 by mavascon          #+#    #+#             */
-/*   Updated: 2026/06/17 18:04:04 by dcarneir         ###   ########.fr       */
+/*   Updated: 2026/06/18 21:01:25 by dcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,10 @@ void			ss(t_stack *a, t_stack *b, t_bench_stats *stats, int *bench);
 int				check_flags(int argc, char **argv, int *algo, int *bench);
 int				init_stack(t_stack *stack, int size);
 int				parse_numbers(t_stack *a, int argc, char **argv, int start);
-int				ft_printf(const char *format, ...);
 void			free_stack(t_stack *stack);
 int				find_min_index(t_stack *a);
+int				count_numbers(int argc, char **argv, int start);
+char			**ft_split(char const *s, char c);
 
 void			select_algo(t_stack a, t_stack b, int *algo, int *bench);
 void			sort_simple(t_stack *b, t_stack *a,

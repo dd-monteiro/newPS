@@ -6,7 +6,7 @@
 /*   By: dcarneir <dcarneir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 15:58:30 by dcarneir          #+#    #+#             */
-/*   Updated: 2026/06/17 17:58:16 by dcarneir         ###   ########.fr       */
+/*   Updated: 2026/06/18 22:08:24 by dcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ int	main(int argc, char **argv)
 	start = check_flags(argc, argv, &algo, &bench);
 	if (!valid_start(argc, start))
 		return (1);
-	if (!init_stacks(&a, &b, argc - start))
+	if (count_numbers(argc, argv, start) == 0)
+		return (write(2, "Error\n", 6), 1);
+	if (!init_stacks(&a, &b, count_numbers(argc, argv, start)))
 		return (1);
 	if (!parse_numbers(&a, argc, argv, start))
 		return (parse_error(&a, &b));

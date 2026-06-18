@@ -6,7 +6,7 @@
 /*   By: dcarneir <dcarneir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 15:27:40 by dcarneir          #+#    #+#             */
-/*   Updated: 2026/06/17 17:57:45 by dcarneir         ###   ########.fr       */
+/*   Updated: 2026/06/18 20:17:32 by dcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	print_bench(int	*algo, t_bench_stats *stats)
 		write (1, "Complex / O(n log n)\n", 21);
 	else
 	{
-		write (1, "Adaptative / ", 13);
+		write (1, "Adaptive / ", 11);
 		if (*algo == 4)
 			write (1, "O(n2)\n", 6);
 		if (*algo == 5)
